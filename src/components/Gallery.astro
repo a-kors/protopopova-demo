@@ -1,0 +1,67 @@
+---
+import { Image } from 'astro:assets';
+import g1 from '../assets/gallery/g01.jpg';
+import g2 from '../assets/gallery/g02.jpg';
+import g3 from '../assets/gallery/g03.jpg';
+import g4 from '../assets/gallery/g04.jpg';
+import g5 from '../assets/gallery/g05.jpg';
+import g6 from '../assets/gallery/g06.jpg';
+import g10 from '../assets/gallery/g10.jpg';
+
+const pics = [
+  { src: g1, alt: 'Участницы тренинга в центре «Семья»' },
+  { src: g2, alt: 'Выпуск тренинга в центре «Семья»' },
+  { src: g4, alt: 'Зал центра «Семья» во время занятия' },
+  { src: g5, alt: 'Занятие в кабинете центра' },
+  { src: g10, alt: 'Праздник центра «Семья»' },
+  { src: g3, alt: 'Тренинг в центре «Семья»' },
+  { src: g6, alt: 'Большая группа участников тренинга' },
+];
+---
+
+<section class="gal">
+  <div class="wrap">
+    <header class="section-head" data-reveal>
+      <span class="section-eyebrow">Жизнь центра</span>
+      <h2>Тренинги, выпуски и&nbsp;праздники «Семьи».</h2>
+    </header>
+
+    <div class="cols">
+      {pics.map((p, i) => (
+        <figure data-reveal data-reveal-delay={Math.min(i * 60, 300)}>
+          <Image src={p.src} alt={p.alt} widths={[400, 700]} sizes="(max-width: 600px) 92vw, 380px" format="webp" quality={82} loading="lazy" />
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .gal {
+    background: var(--bg);
+  }
+  .cols {
+    columns: 3;
+    column-gap: 14px;
+  }
+  figure {
+    margin: 0 0 14px;
+    break-inside: avoid;
+  }
+  figure :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 14px;
+  }
+  @media (max-width: 860px) {
+    .cols {
+      columns: 2;
+    }
+  }
+  @media (max-width: 520px) {
+    .cols {
+      columns: 1;
+    }
+  }
+</style>

@@ -1,0 +1,250 @@
+---
+import { Image } from 'astro:assets';
+import aboutImg from '../assets/photos/about.jpg';
+import { bioFacts, roles, education, team } from '../data/master';
+---
+
+<section id="about">
+  <div class="wrap">
+    <div class="grid">
+      <figure class="photo" data-reveal>
+        <Image
+          src={aboutImg}
+          alt="Оксана Протопопова на юбилее центра «Семья»"
+          widths={[480, 720, 960]}
+          sizes="(max-width: 860px) 440px, 420px"
+          format="webp"
+          quality={88}
+          loading="lazy"
+          class="photo-img"
+        />
+      </figure>
+
+      <div class="copy" data-reveal data-reveal-delay="140">
+        <span class="section-eyebrow">Об основателе</span>
+        <h2>
+          Оксана Протопопова, <em>основатель</em> центра «Семья».
+        </h2>
+
+        <p class="lead">
+          Детский и&nbsp;взрослый психолог, практикует более 20&nbsp;лет.
+          Психолог-практик, песочный терапевт, эксперт по&nbsp;детско-родительским
+          и&nbsp;семейным отношениям. Замужем, мама сына.
+        </p>
+
+        <ul class="roles">
+          {roles.map((r) => <li>{r}</li>)}
+        </ul>
+
+        <dl class="facts">
+          {bioFacts.map((f) => (
+            <div>
+              <dt>{f.value}</dt>
+              <dd>{f.label}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+
+    <div class="lower">
+      <div class="edu" data-reveal>
+        <h3>Образование и&nbsp;квалификация</h3>
+        <ol class="timeline">
+          {education.map((e) => (
+            <li>
+              <span class="y">{e.year}</span>
+              <span class="t">{e.text}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div class="team" data-reveal data-reveal-delay="120">
+        <h3>Команда центра</h3>
+        <ul>
+          {team.map((m) => (
+            <li>
+              <span class="name">{m.name}</span>
+              <span class="role">{m.role}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: clamp(32px, 6vw, 80px);
+    align-items: center;
+  }
+  .photo {
+    margin: 0;
+  }
+  .photo-img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    display: block;
+  }
+  h2 {
+    margin-bottom: 28px;
+  }
+  h2 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .lead {
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 22px;
+    line-height: 1.6;
+  }
+  .roles {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .roles li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 15.5px;
+    line-height: 1.5;
+    color: var(--ink-muted);
+  }
+  .roles li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 8px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .facts {
+    margin: 32px 0 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .facts div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .facts dt {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+    white-space: nowrap;
+  }
+  .facts dd {
+    margin: 0;
+    font-size: 13px;
+    color: var(--ink-muted);
+  }
+
+  .lower {
+    margin-top: clamp(56px, 7vw, 96px);
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: start;
+  }
+  .lower h3 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    margin: 0 0 22px;
+    color: var(--ink);
+  }
+  .timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--line);
+  }
+  .timeline li {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .timeline .y {
+    font-family: var(--font-serif);
+    color: var(--accent);
+    font-size: 16px;
+    white-space: nowrap;
+  }
+  .timeline .t {
+    color: var(--ink);
+    font-size: 15.5px;
+    line-height: 1.5;
+  }
+  .team {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 28px 26px;
+  }
+  .team ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .team li {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .team .name {
+    font-weight: 500;
+    color: var(--ink);
+    font-size: 15.5px;
+  }
+  .team .role {
+    font-size: 14px;
+    color: var(--ink-muted);
+    line-height: 1.45;
+  }
+
+  @media (max-width: 860px) {
+    .grid,
+    .lower {
+      grid-template-columns: 1fr;
+    }
+    .photo {
+      max-width: 440px;
+      width: 100%;
+      margin: 0 auto;
+    }
+  }
+  @media (max-width: 560px) {
+    .facts {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .timeline li {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+  }
+</style>
