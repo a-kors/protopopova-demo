@@ -29,7 +29,7 @@ const pics = [
     <div class="cols">
       {pics.map((p, i) => (
         <figure data-reveal data-reveal-delay={Math.min(i * 60, 300)}>
-          <Image src={p.src} alt={p.alt} widths={[400, 700]} sizes="(max-width: 600px) 92vw, 380px" format="webp" quality={82} loading="lazy" />
+          <Image src={p.src} alt={p.alt} widths={[400, 700]} sizes="(max-width: 600px) 92vw, 380px" format="webp" quality={70} loading="lazy" />
         </figure>
       ))}
     </div>
